@@ -1,13 +1,15 @@
 <template>
-	<div>logout</div>
 </template>
 
 <script>
 export default {
 
   name: 'logout',
-  layout: 'admin',
-
+  layout: 'empty',
+  beforeCreate(){
+  	this.$store.dispatch('auth/logout');
+  	this.$router.push('/admin/login');
+  },
   data () {
     return {
 

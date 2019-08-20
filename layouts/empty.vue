@@ -13,6 +13,16 @@ export default {
     return {
 
     }
+  }, 
+  computed: {
+  	error() {
+  		return this.$store.getters.error
+  	}
+  },
+  watch: {
+  	error(value) {
+  		this.$message.error(value)
+  	}
   }
 }
 </script>

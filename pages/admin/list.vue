@@ -7,6 +7,7 @@ export default {
 
   name: 'list',
   layout: 'admin',
+  middleware: ['admin-auth'],
 
   data () {
     return {
