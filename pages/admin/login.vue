@@ -28,8 +28,8 @@ export default {
     return {
     	loading: false,
       loginForm: {
-        name: '',
-        password: ''
+        name: 'admin',
+        password: '123456'
       },
       rules: {
         name: [
@@ -45,16 +45,22 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate( async (valid) => {
         if (valid) {
-        	this.loading = true;
 
+        	this.loading = true;
         	const data = {
-        		name: this.loginForm.name,
+        		login: this.loginForm.name,
         		password: this.loginForm.password,
         	}
 
+          try {
+        	   await this.$store.dispatch('auth/login', data);
+    		      this.$router.push('/admin')
+          } catch{
+              this.loading = false;
+          }
 
-        	await this.$store.dispatch('auth/login', data);
-    		this.$router.push('/admin')
+
+
     		// this.$message.success('you are logged in')
 
 
