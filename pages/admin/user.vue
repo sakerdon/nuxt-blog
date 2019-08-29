@@ -50,7 +50,7 @@ export default {
         	this.loading = true;
 
         	const data = {
-        		name: this.userForm.name,
+        		login: this.userForm.name,
         		password: this.userForm.password,
         	}
         	await this.$store.dispatch('auth/createUser', data);
