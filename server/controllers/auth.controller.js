@@ -16,7 +16,7 @@ module.exports.login = async (req, res) => {
       }, keys.JWT, {expiresIn: 60 * 60})
       res.json({token})
     } else {
-      res.status(404).json({message: 'User not found'})
+      res.status(401).json({message: 'User not found'})
     }
   } else {
     res.status(404).json({message: 'User not found'})

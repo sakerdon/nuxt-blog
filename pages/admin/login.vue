@@ -41,6 +41,22 @@ export default {
       }
     };
   },
+  mounted() {
+    const {message} = this.$route.query;
+
+    switch(message) {
+       case 'login':
+         this.$message.info('Before you must log in')
+         break;
+       case 'logout':
+         this.$message.success('You are logged out')
+         break;
+       case 'session':
+         this.$message.warning('Session the end. Please, log in')
+
+         
+     } 
+  }, 
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate( async (valid) => {
