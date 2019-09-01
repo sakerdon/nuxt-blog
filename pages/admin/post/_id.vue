@@ -10,8 +10,8 @@
 		    <el-input v-model="postForm.title"></el-input>
 		  </el-form-item>
 
-		  <el-form-item label="Content (.html or .md format)" prop="content">
-		    <el-input v-model="postForm.content" type="textarea" rows="14"></el-input>
+		  <el-form-item label="Content (.html or .md format)" prop="text">
+		    <el-input v-model="postForm.text" type="textarea" rows="14"></el-input>
 		  </el-form-item>
 
 		  
@@ -34,33 +34,36 @@ export default {
   		loading: false,
   		postForm: {
   		  title: post.title,
-  		  content: '',
+  		  text: '',
   		},	  
   		rules: {
   		  title: [
   		    { required: true, message: 'Please input title', trigger: 'change' },
   		    { min: 1, max: 300, message: 'Length should be 1 to 300', trigger: 'change' }
   		  ],
-  		  content: [
+  		  text: [
   		    { required: true, message: 'Please input text', trigger: 'change' },
   		    { min: 1, max: Infinity, message: 'Length should be 1 symbol minimum', trigger: 'change' }
   		  ]
   		}
   	} 
   },
+  mounted() {
+    this.postForm.text = this.post.text;
+  },
   // data() {
   //   return {
   //     loading: false,
   //     postForm: {
   //       title: '',
-  //       content: '',
+  //       text: '',
   //     },	  
   //     rules: {
   //       title: [
   //         { required: true, message: 'Please input title', trigger: 'change' },
   //         { min: 1, max: 300, message: 'Length should be 1 to 300', trigger: 'change' }
   //       ],
-  //       content: [
+  //       text: [
   //         { required: true, message: 'Please input text', trigger: 'change' },
   //         { min: 1, max: Infinity, message: 'Length should be 1 symbol minimum', trigger: 'change' }
   //       ]
@@ -74,14 +77,18 @@ export default {
         	this.loading = true;
 
         	const data = {
-        		title: this.postForm.title,
-        		content: this.postForm.content,
+        		id: this.post._id,
+        		text: this.postForm.text,
+            title: this.postForm.title,
         	}
-        	// await this.$store.dispatch('auth/login', data);
-    		// this.$router.push('/admin')
-    		// this.$message.success('you are logged in')
 
-
+          try {
+            await this.$store.dispatch('post/updatePost', data)
+            this.$message.success('Post was updated')
+            this.loading = false
+          } catch (e) {
+            this.loading = false
+          }
         } 
 
       });
