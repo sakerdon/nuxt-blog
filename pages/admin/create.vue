@@ -31,8 +31,8 @@
 		  <div class="el-upload__tip">jpg/png files with a size less than 500kb</div>
 		</el-upload>
 
-		  <el-form-item label="Content (.html or .md format)" prop="content">
-		    <el-input v-model="postForm.content" type="textarea" rows="14"></el-input>
+		  <el-form-item label="Content (.html or .md format)" prop="text">
+		    <el-input v-model="postForm.text" type="textarea" rows="14"></el-input>
 		  </el-form-item>
 
 		  
@@ -44,7 +44,7 @@
 
 		<el-dialog title="Preview" :visible.sync="preview" width="100%">
 		  	
-		  <vue-markdown :key="postForm.content">{{postForm.content}}</vue-markdown>
+		  <vue-markdown :key="postForm.text">{{postForm.text}}</vue-markdown>
 
 		</el-dialog>
 	</div>
@@ -61,14 +61,14 @@ export default {
       image: null,
       postForm: {
         title: '',
-        content: '',
+        text: '',
       },	  
       rules: {
         title: [
           { required: true, message: 'Please input title', trigger: 'blur' },
           { min: 1, max: 300, message: 'Length should be 1 to 300', trigger: 'blur' }
         ],
-        content: [
+        text: [
           { required: true, message: 'Please input text', trigger: 'blur' },
           { min: 1, max: Infinity, message: 'Length should be 1 symbol minimum', trigger: 'blur' }
         ]
@@ -85,18 +85,18 @@ export default {
         if (valid) {
         	this.loading = true;
 
-        	const data = {
+        	const formData = {
         		title: this.postForm.title,
-        		content: this.postForm.content,
+        		text: this.postForm.text,
         		image: this.image
         	}
 
-        	await this.$store.dispatch('post/createPost', data);
+        await this.$store.dispatch('post/createPost', formData);
     		this.$message.success('Post was created');
 
     		this.$refs.upload.clearFiles();
     		this.postForm.title = '';
-    		this.postForm.content = '';
+    		this.postForm.text = '';
 
     		this.loading = false;
 

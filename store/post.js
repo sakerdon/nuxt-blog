@@ -16,13 +16,13 @@ let posts = [
 ]
 
 
-export const state = () => ({
+// export const state = () => ({
 	
-})
+// })
 
-export const mutations = {
+// export const mutations = {
 	
-}
+// }
 
 export const actions = {
 	async fetchAdminPosts() {
@@ -46,21 +46,18 @@ export const actions = {
 			}, 200)
 		})
 	},
-	async createPost({}, {title, content, image}) {
+	async createPost({commit}, {title, text, image}) {
 
 		try{
-			const data = new formData();
+			const data = new FormData();
 			data.append('title', title);
-			data.append('content', content);
+			data.append('text', text);
 			data.append('image', image, image.name);
 
-			return await new Promise(resolve => {
-				setTimeout( () => {
-					resolve()
-				}, 200)
-			})	
+			return await this.$axios.post('/api/post/admin', data)
+
 		}
-		catch{
+		catch(e){
 			commit('setError', e, {root: true})
 			throw new Error(e);
 		}
