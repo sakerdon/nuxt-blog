@@ -16,6 +16,13 @@
 <script>
   export default {
   	name: 'CommentForm',
+    props: {
+      postId: {
+        type: String,
+        required: true
+      }
+    },
+
     data() {
       return {
       	loading: false,
@@ -37,19 +44,25 @@
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
           	this.loading = true;
 
           	const data = {
+              postId: this.postId,
           		name: this.commentForm.name,
-          		comment: this.commentForm.desc,
+          		text: this.commentForm.desc,
           	}
-          	setTimeout( () => {
-          		this.$emit('created', data);
-          		this.loading = false;
-          		this.$message.success('Comment has been added')
-          	}, 1000)
+            try{
+            const newComment = await this.$store.dispatch('comment/create', data);
+          	 this.$emit('created', newComment);
+          	 this.loading = false;
+          	 this.$message.success('Comment has been added')
+
+            } catch(e) {
+             this.loading = false;
+
+            }
 
           } 
 

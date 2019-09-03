@@ -6,26 +6,27 @@
 		:body-style="{padding: 0}"
 		>
 		<header slot="header">
-		<h3 class="post-title">{{text}}</h3>
+
+		<h3 class="post-title">{{post.title}}</h3>
 		<small>
 			<i class="el-icon-time"></i>
-			{{new Date().toLocaleString()}}
+			{{new Date(post.date).toLocaleString()}}
 		</small>
 		</header>
 		<div class="post-body">
-			<img src="https://via.placeholder.com/800x600" alt="Post_image">
+			<img :src="post.imageUrl" alt="Post_image">
 		</div>
 		<div class="post-footer">
 			<el-button 
 				round
-				@click="onOpenPost(text)"
+				@click="onOpenPost(post._id)"
 				>Читать
 				<i class="el-icon-right el-icon-arrow-right"></i>
 			</el-button>
 
 			<span>
 				<i class="el-icon-message"></i>
-				12
+				{{post.comments.length}}
 			</span>
 		</div>
 			
@@ -36,7 +37,12 @@
 
 export default {
   name: 'Post',
-  props: ['text'],
+  props: {
+  	post: {
+  		type: Object,
+  		required: true
+  	}
+  },
   data () {
     return {
 
@@ -45,7 +51,7 @@ export default {
 
   methods: {
   	onOpenPost(id) {
-  		console.log(id);
+  		
   		this.$router.push(`/post/${id}`)
   	}
   }

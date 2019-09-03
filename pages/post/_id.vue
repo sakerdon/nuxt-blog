@@ -5,29 +5,33 @@
   	<nuxt-link class="el-link el-link--primary" to="/">
   		<i class="el-icon-back"></i>Back
   	</nuxt-link>
-    <h1>Post</h1>
+    <h1>{{post.title}}</h1>
     <small>
     	<i class="el-icon-time"></i>
-    	{{new Date().toLocaleString()}}
+    	{{new Date(post.date).toLocaleString()}}
     </small>
-  	<small>views: 44</small>
-  	<img class="post-image" src="https://via.placeholder.com/800x600" alt="Photo">
+  	<small>views: {{post.views}}</small>
+  	<img class="post-image" :src="post.imageUrl" alt="Photo">
 
   	</header>
   	<main class="post-body">
-  	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam a consequuntur, nihil. Voluptate, fugit sunt alias error nobis, necessitatibus vero quisquam mollitia odit non. Ducimus, repellendus enim nemo debitis aperiam.</p>
+  	 <vue-markdown>{{post.text}}</vue-markdown>
   </main>
 
   <footer>
   	<div class="comments-form">
   	<h2>Your comment:</h2>
-  		<app-comment-form @created="onCommentCreated"></app-comment-form>
+  		<app-comment-form 
+        @created="onCommentCreated"
+        :postId="post._id"
+      ></app-comment-form>
   	</div>
 
-  	<div class="comments" v-if="true">
+  	<div class="comments" v-if="post.comments.length">
   		<h2>Comments:</h2>
-  		<div v-for="(comment, i) in comments" >
-  			<app-comment :comment="comment.comment" :name="comment.name">		
+  		<div v-for="(comment, i) in post.comments" >
+  			<app-comment
+        :comment="comment">
   			</app-comment>
   		</div>
   	</div>
@@ -48,28 +52,20 @@ export default {
 
 	methods: {
 		onCommentCreated(data){
-			console.log('coment:', data);
-			this.comments.unshift(data)
+			this.post.comments.unshift(data)
 		}
 	},
 
-	mounted(){
-	},
-
   validate({ params }) {
-    return Boolean(params.id)
+    return Boolean(params.id);
   },
 
-
-  data(context) {
-    return {
-    	comments: [
-    			{name: "Ivan", comment: "	Lorem ipsum dolor sit amet."},
-    			{name: "Mike", comment: "	Lorem"},
-    	]
-    	
-    }
+  async asyncData({store, params}) {
+    const post = await store.dispatch('post/fetchPostById', params.id);
+    await store.dispatch('post/addView', post)
+    return {post};
   }
+
 }
 
 </script>

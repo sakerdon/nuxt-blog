@@ -4,14 +4,14 @@
 			<span class="person-name"></span>
 			<small>
 				<i class="el-icon-time"></i>
-				{{new Date().toLocaleString()}}
+				{{new Date(comment.date).toLocaleString()}}
 			</small>
 		</div>
 		<div class="comment-name">
-			{{name}}
+			{{comment.name}}
 		</div>
 		<div class="comment-text">
-			{{comment}}
+			{{comment.text}}
 		</div>
 	</el-card>
 </template>
@@ -20,7 +20,12 @@
 export default {
 
   name: 'Comment',
-  props: ['name', 'comment'],
+  props: {
+  	comment: {
+  		type: Object,
+  		required: true
+  	}
+  },
   data () {
     return {
 
