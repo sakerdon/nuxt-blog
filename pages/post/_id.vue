@@ -6,11 +6,13 @@
   		<i class="el-icon-back"></i>Back
   	</nuxt-link>
     <h1>{{post.title}}</h1>
-    <small>
-    	<i class="el-icon-time"></i>
-    	{{new Date(post.date).toLocaleString()}}
-    </small>
-  	<small>views: {{post.views}}</small>
+    <div class="subtitle">
+      <small>
+        <i class="el-icon-time"></i>
+        {{new Date(post.date).toLocaleString()}}
+      </small>
+          <small><i class="el-icon-view"></i> {{post.views}}</small>
+    </div>
   	<img class="post-image" :src="post.imageUrl" alt="Photo">
 
   	</header>
@@ -45,6 +47,13 @@ import AppCommentForm from '~/components/main/CommentForm'
 
 export default {
 
+  head() {
+    return {
+      title: process.env.appName + ':: ' + this.post.title
+    }
+
+  },
+
 	components: {
 		AppComment,
 		AppCommentForm
@@ -77,8 +86,15 @@ export default {
 		line-height: 1.7;
 	}
 
+  .subtitle {
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+  }
+
 	h1 {
-		margin: 20px 0;
+		margin: 20px 0 10px;
+    font-size: 32px;
 	}
 	small{
 		margin-bottom: 20px;
@@ -88,4 +104,6 @@ export default {
 		display: block;
 		margin-bottom: 30px;
 	}
+
+
 </style>

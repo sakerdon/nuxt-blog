@@ -2,7 +2,6 @@
 
 	<el-card 
 		class="post"
-		shadow="hover"
 		:body-style="{padding: 0}"
 		>
 		<header slot="header">
@@ -14,13 +13,13 @@
 		</small>
 		</header>
 		<div class="post-body">
-			<img :src="post.imageUrl" alt="Post_image">
+			<img :src="post.imageUrl" alt="Post_image" :style="'max-height:' + height">
 		</div>
 		<div class="post-footer">
 			<el-button 
 				round
 				@click="onOpenPost(post._id)"
-				>Читать
+				>Read more
 				<i class="el-icon-right el-icon-arrow-right"></i>
 			</el-button>
 
@@ -41,6 +40,10 @@ export default {
   	post: {
   		type: Object,
   		required: true
+  	},
+  	height: {
+  		required: false,
+  		default: '200px'
   	}
   },
   data () {
@@ -70,6 +73,8 @@ export default {
 	img {
 		width: 100%;
 		max-width: 100%;
+		max-height: 200px;
+		object-fit: cover;
 	}
 
 	.el-icon-arrow-right{

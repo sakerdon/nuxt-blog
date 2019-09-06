@@ -6,23 +6,19 @@
       @open=""
       @close="">
       <el-menu-item index="/admin">
-        <i class="el-icon-menu"></i>
-        <span>Analytics</span>
-      </el-menu-item>
-      <el-menu-item index="/admin/create">
-        <i class="el-icon-menu"></i>
-        <span>Create</span>
+        <i class="el-icon-plus"></i>
+        <span>Create post</span>
       </el-menu-item>
       <el-menu-item index="/admin/list">
         <i class="el-icon-menu"></i>
-        <span>Posts</span>
+        <span>Posts list</span>
       </el-menu-item>
       <el-menu-item index="/admin/user">
-        <i class="el-icon-menu"></i>
-        <span>Users</span>
+        <i class="el-icon-user"></i>
+        <span>Add user</span>
       </el-menu-item>
       <el-menu-item index="/admin/logout">
-        <i class="el-icon-menu"></i>
+        <i class="el-icon-right"></i>
         <span>Log out</span>
       </el-menu-item>
     </el-menu>

@@ -2,8 +2,10 @@
 	<div class="post">
 		<el-breadcrumb separator="/">
 		  <el-breadcrumb-item to='/admin/list'>Posts</el-breadcrumb-item>
-		  <el-breadcrumb-item>{{post._id}}</el-breadcrumb-item>
+		  <el-breadcrumb-item>{{post.title}}</el-breadcrumb-item>
 		</el-breadcrumb>
+
+    <h2>Edit post</h2>
 		
 		<el-form :model="postForm" :rules="rules" ref="postForm" class="demo-postForm">
 		  <el-form-item label="Title" prop="title">
@@ -16,7 +18,7 @@
 
 		  
 		  <el-form-item>
-		    <el-button :loading="loading" type="primary" @click.prevent="submitForm('postForm')">Login</el-button>
+		    <el-button :loading="loading" type="primary" @click.prevent="submitForm('postForm')">Save</el-button>
 		  </el-form-item>
 		</el-form>
 
@@ -51,25 +53,7 @@ export default {
   mounted() {
     this.postForm.text = this.post.text;
   },
-  // data() {
-  //   return {
-  //     loading: false,
-  //     postForm: {
-  //       title: '',
-  //       text: '',
-  //     },	  
-  //     rules: {
-  //       title: [
-  //         { required: true, message: 'Please input title', trigger: 'change' },
-  //         { min: 1, max: 300, message: 'Length should be 1 to 300', trigger: 'change' }
-  //       ],
-  //       text: [
-  //         { required: true, message: 'Please input text', trigger: 'change' },
-  //         { min: 1, max: Infinity, message: 'Length should be 1 symbol minimum', trigger: 'change' }
-  //       ]
-  //     }
-  //   };
-  // },
+  
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate( async (valid) => {
@@ -98,4 +82,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+h2 {
+  margin-top: 2rem; 
+}
 </style>

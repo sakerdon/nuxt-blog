@@ -22,6 +22,13 @@
 <script>
 export default {
 
+  head() {
+    return {
+      title: process.env.appName + ':: Create user'
+    }
+
+  },
+
   name: 'user',
   layout: 'admin',
   middleware: ['admin-auth'],

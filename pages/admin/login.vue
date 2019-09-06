@@ -21,6 +21,13 @@
 <script>
 export default {
 
+  head() {
+    return {
+      title: process.env.appName + ':: Login'
+    }
+
+  },
+
   name: 'login',
   layout: 'empty',
 

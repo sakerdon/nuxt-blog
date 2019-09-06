@@ -6,7 +6,7 @@
     <el-main>
       <nuxt/>
     </el-main>
-    <el-footer>Footer</el-footer>
+    <el-footer class="footer" align="center">&copy; BestBlog, {{new Date().getFullYear()}}</el-footer>
   </el-container>
 
 </template>
@@ -21,6 +21,8 @@
   }
 </script>
 
-<style>
+<style scoped>
+  .footer {
 
+  }
 </style>

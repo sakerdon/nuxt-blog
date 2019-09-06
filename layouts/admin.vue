@@ -4,20 +4,29 @@
       <el-aside width="200px">
         <app-sidebar></app-sidebar>
       </el-aside>
-      <el-main>
-        <nuxt />
-      </el-main>
+
+      <el-container>
+        <el-header>
+          <app-navigation></app-navigation>
+        </el-header>  
+        <el-main>
+          <nuxt />
+        </el-main>
+      </el-container>
     </el-container>
   </div>
 </template>
 
 
 <script>
-import AppSidebar from '@/components/admin/Sidebar'
+import AppSidebar from '@/components/admin/Sidebar';
+import AppNavigation from "~/components/main/Navigation";
+
 
 export default {
   components: {
-    AppSidebar
+    AppSidebar,
+    AppNavigation
   },
 
   name: 'admin',
