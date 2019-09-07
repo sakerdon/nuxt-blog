@@ -10,7 +10,7 @@ async function start() {
   const nuxt = new Nuxt(config)
 
   const {
-    host = process.env.HOST || 'https://nuxt-bestblog.herokuapp.com/',
+    host = /*process.env.HOST || */'https://nuxt-bestblog.herokuapp.com/',
     port = process.env.PORT || 3000
   } = nuxt.options.server
 
