@@ -51,8 +51,8 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseUrl: process.env.BASE_URL /*|| 'http://localhost:3000'*/
-    baseURL: 'https://nuxt-bestblog.herokuapp.com/'
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    // baseURL: 'https://nuxt-bestblog.herokuapp.com/'
   },
 
   env: {
