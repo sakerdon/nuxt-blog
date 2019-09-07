@@ -1,4 +1,4 @@
 module.exports = {
-	MOGO_URI: process.env.MOGO_URI,
+	MONGO_URI: process.env.MONGO_URI,
 	JWT: process.env.JWT
 }
